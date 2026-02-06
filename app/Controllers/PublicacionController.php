@@ -362,6 +362,9 @@ class PublicacionController extends ResourceController
                 'tipo'          => $bloque['tipo'],
                 'texto'         => $bloque['texto'] ?? null,
                 'alineacion'         => $bloque['alineacion'] ?? null,
+                'rotacion'         => $bloque['rotacion'] ?? 0,
+                'alto'         => $bloque['alto'] ?? 0,
+                'ancho'         => $bloque['ancho'] ?? 0,
                 'url'           => $bloque['url'] ?? null,
                 'orden'         => $bloque['orden'],
             ];
@@ -466,6 +469,9 @@ class PublicacionController extends ResourceController
                 'tipo'          => $bloque['tipo'],
                 'texto'         => $bloque['texto'] ?? null,
                 'alineacion'         => $bloque['alineacion'] ?? null,
+                'rotacion'         => $bloque['rotacion'] ?? 0,
+                'alto'         => $bloque['alto'] ?? 0,
+                'ancho'         => $bloque['ancho'] ?? 0,
                 'url'           => $bloque['url'] ?? null,
                 'orden'         => $bloque['orden']
             ];

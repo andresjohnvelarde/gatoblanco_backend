@@ -18,6 +18,9 @@ class BloqueModel extends Model
         'url',
         'texto',
         'alineacion',
+        'rotacion',
+        'alto',
+        'ancho',
         'orden',
     ];
 
