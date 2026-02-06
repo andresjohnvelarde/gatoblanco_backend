@@ -17,6 +17,7 @@ class PublicacionModel extends Model
     protected $allowedFields = [
         'tipo',
         'titulo',
+        'autores',
         'descripcion',
         'fecha_publicacion',
         'estado',

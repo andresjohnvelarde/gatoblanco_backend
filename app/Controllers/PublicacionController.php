@@ -426,6 +426,7 @@ class PublicacionController extends ResourceController
         // 🔹 1. Actualizar datos base de publicación
         $publicacionData = [
             'titulo'           => $data['titulo'] ?? null,
+            'autores'           => $data['autores'] ?? null,
             'descripcion'      => $data['descripcion'] ?? null,
             'fecha_publicacion' => $data['fecha_publicacion'] ?? null,
             'estado'           => $data['estado'] ?? null,

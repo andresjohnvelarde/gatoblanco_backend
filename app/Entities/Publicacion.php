@@ -10,6 +10,7 @@ class Publicacion extends Entity
         'idpublicacion'     => null,
         'tipo'              => null,
         'titulo'            => null,
+        'autores'            => null,
         'descripcion'       => null,
         'fecha_publicacion' => null,
         'estado'            => 1,
