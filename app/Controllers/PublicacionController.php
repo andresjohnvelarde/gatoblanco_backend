@@ -453,7 +453,7 @@ class PublicacionController extends ResourceController
         foreach ($bloquesActuales as $bloque) {
             if (!in_array($bloque['idbloque'], $idsRecibidos)) {
 
-                if (in_array($bloque['tipo'], ['imagen', 'video'])) {
+                if (in_array($bloque['tipo'], ['imagen', 'video']) && !empty($bloque['url'])) {
                     log_message('debug', 'DE COMO LLEGAMOS ACÁ');
                     $this->eliminarArchivoBloque($bloque['tipo'], $bloque['url']);
                 }
@@ -676,5 +676,45 @@ class PublicacionController extends ResourceController
         ]);
 
         return $this->respond(['ok' => true]);
+    }
+
+
+    public function cambiarDimensiones($id)
+    {
+        $db = \Config\Database::connect();
+
+        $bloqueModel = new \App\Models\BloqueModel();
+
+        // 1. Usamos asArray() para que CI ignore la Entity y devuelva un simple array
+        // Esto evita el error de "mysqli_result::fetch_object()"
+        $bloque = $bloqueModel->asArray()->find($id);
+
+        if (!$bloque) {
+            return $this->failNotFound("No se encontró el bloque con ID: $id");
+        }
+
+        // 2. Iniciamos la transacción después de verificar que existe
+        $db->transStart();
+
+        // 3. Intercambiamos los valores (ahora usamos sintaxis de array [])
+        $data = [
+            'alto'  => $bloque['ancho'],
+            'ancho' => $bloque['alto']
+        ];
+
+        // 4. Actualizamos
+        $bloqueModel->update($id, $data);
+
+        $db->transComplete();
+
+        if ($db->transStatus() === false) {
+            return $this->failServerError("Error al procesar el cambio en la base de datos.");
+        }
+
+        return $this->respond([
+            'ok' => true,
+            'mensaje' => 'Dimensiones intercambiadas',
+            'data' => $data
+        ]);
     }
 }

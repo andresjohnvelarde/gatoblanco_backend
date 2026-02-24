@@ -25,7 +25,7 @@ $routes->group('api', ['filter' => 'cors'], function ($routes) {
     // Aumentar visualizaciones a una noticia o reportaje
     $routes->patch('vista/publicaciones/(:num)', 'PublicacionController::incrementarVisualizacion/$1');
 
-    
+
     //ADMINISTRADOR
     //Obtener usuarios
     $routes->get('usuarios', 'UsuarioController::index', [
@@ -108,4 +108,9 @@ $routes->group('api', ['filter' => 'cors'], function ($routes) {
     ]);
 
     $routes->get('video/stream/(:any)', 'VideoController::stream/$1');
+
+    //Cambiar dimensiones de un bloque tipo imagen
+    $routes->patch('bloques/(:num)', 'PublicacionController::cambiarDimensiones/$1', [
+        'filter' => ['jwt:ROLE_administrador,ROLE_registrador']
+    ]);
 });
